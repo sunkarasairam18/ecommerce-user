@@ -5,3 +5,7 @@
   padding: 0px;
   
 }
+.appbody{
+  height: 88%;
+  overflow: scroll;
+}

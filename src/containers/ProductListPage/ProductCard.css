@@ -1,0 +1,32 @@
+.productCard{
+    width: 200px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* margin: 3px; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.productCardImg{
+   width: 150px;
+   height: 150px;
+   overflow: hidden;
+   text-align: center;
+   /* border: 1px solid black; */
+}
+.productCardImg img{
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: contain;
+}
+.pname{
+    text-align: center;
+    font-size: 14px;
+    width: 90%;
+}
+.pcost{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}

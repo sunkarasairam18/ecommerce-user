@@ -5,9 +5,11 @@ import MenuHeader from './containers/MenuHeader';
 import { setCategories } from './Store/reducer';
 import { axiosInstance } from './api/axios';
 import { useSelector,useDispatch } from 'react-redux';
+import { Routes,Route } from 'react-router-dom';
 
 import io from 'socket.io-client';
-
+import HomePage from './containers/HomePage';
+import ProductListPage from './containers/ProductListPage';
 
 function App() {
   const cat = useSelector(state => state.data.categories);
@@ -46,6 +48,13 @@ function App() {
     <div className="App">
       <Header/>
       <MenuHeader/>
+      <div className='appbody'>
+
+        <Routes>
+          <Route path="/:slug" element={<ProductListPage/>}/>
+          <Route path="/" element={<HomePage/>}/>
+        </Routes>
+      </div>
     </div>
   );
 }
