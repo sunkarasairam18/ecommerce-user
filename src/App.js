@@ -10,6 +10,7 @@ import { Routes,Route } from 'react-router-dom';
 import io from 'socket.io-client';
 import HomePage from './containers/HomePage';
 import ProductListPage from './containers/ProductListPage';
+import DisplayProducts from './containers/DisplayProducts';
 
 function App() {
   const cat = useSelector(state => state.data.categories);
@@ -51,7 +52,7 @@ function App() {
       <div className='appbody'>
 
         <Routes>
-          <Route path="/:slug" element={<ProductListPage/>}/>
+          <Route path="/:slug" element={<DisplayProducts/>}/>
           <Route path="/" element={<HomePage/>}/>
         </Routes>
       </div>
