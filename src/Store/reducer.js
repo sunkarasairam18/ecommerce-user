@@ -6,7 +6,19 @@ const slice = createSlice({
        categories: [],
        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjA1MTdkMDM3N2U1YzVhYzQxZjk1MWUiLCJlbWFpbCI6InZhbXNpQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY0NDU3NDI3MH0.NzXQDVOt3lvdo__7h53QDCq0YQ_lFNe9zIpHr8LhS20",
        products: [],
-       page: {}
+       page: {},
+       user: {
+            _id:"",
+            userName: "",
+            email: "",
+            role: "",
+            token: localStorage.getItem("token")?localStorage.getItem("token"):""
+        },
+        toast: {
+            msg: "",
+            show: false,
+            severity: ""
+        }
     },
     reducers: {        
        setCategories: (user,action)=>{
