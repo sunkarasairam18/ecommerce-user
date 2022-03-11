@@ -61,6 +61,7 @@
     height: 80%;
     /* background-color: blue; */
     width: 30%;
+    /* min-width: 20%; */
 }
 .inhrlogin{
     font-weight: bold;
@@ -83,7 +84,35 @@
 .inhrsignup:hover{
     background-color: rgb(72, 72, 241);
 }
+.username{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+}
+.uin{
+    display: flex;
+    align-items: center;
+}
+.con{
+    font-weight: 600;
 
+}
+.udropicon{
+    margin-top: 2px;
+}
+.udrop{
+    position: absolute;
+    z-index: 100;
+    /* bottom: -500px; */
+    /* background-color: yellow; */
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 2%);
+    
+
+}
 .inhrcart{
     display: flex;
     align-items: center;

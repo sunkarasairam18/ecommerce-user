@@ -8,11 +8,20 @@ import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from '@mui/material/Button';
 import Backdrop from '@mui/material/Backdrop';
-import SignIn from '../containers/SignIn';
+import SignIn from '../SignIn';
+import { useSelector,useDispatch } from 'react-redux';
+import { setToast } from '../../Store/reducer';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import UserDropDown from '../UserDropDown';
+
 
 const Header = () => {
     const [search,setSearch] = useState('');
     const [login,setLogin] = useState(false);
+    const token = useSelector(state => state.data.user.token);
+    const userName = useSelector(state => state.data.user.userName);
+    const dispatch = useDispatch();
+    const [showUserDrop,setShowUserDrop] = useState(false);
 
 
     return ( 
@@ -34,13 +43,31 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="inhr">
-                    <div className="inhrlogin" onClick={()=>setLogin(true)}>
+                    {!token && <div className="inhrlogin" onClick={()=>setLogin(true)}>
                         Login
-                    </div>
-                    {/* <Button variant="text" className="inhrlogin">Login</Button> */}
-                    <div className="inhrsignup">
+                    </div>}
+                    {!token && <div className="inhrsignup">
                         Sign Up
-                    </div>
+                    </div>}
+                    
+                    {userName && 
+                        <div className='username' onMouseOver={()=>setShowUserDrop(true)} onMouseLeave={()=>setShowUserDrop(false)}>
+                            <div className='uin'>
+
+                                <div className="con">
+                                    {userName}
+                                </div>
+                                <div className="udropicon">
+                                    <KeyboardArrowDownIcon/>
+                                </div>
+                                
+                            </div>
+                            <div className='udrop'>
+                                <UserDropDown show={showUserDrop}/>
+                            </div>
+                        </div>
+                    }
+                    
                     <div className="inhrcart">
                         <Badge badgeContent={4} color="warning">
                             <ShoppingCartIcon style={{color:"white"}}/>

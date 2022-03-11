@@ -20,20 +20,42 @@ const slice = createSlice({
             severity: ""
         }
     },
-    reducers: {        
-       setCategories: (user,action)=>{
-           user.categories = action.payload;
-       },
-       setProducts: (user,action)=>{
-           user.products = action.payload;
-       },
-       setPage: (user,action)=>{
-           user.page = action.payload.page;
-       }
+    reducers: {
+        signInUser: (user,actin)=>{
+            user.user = actin.payload;
+        },
+        setToken: (user,action)=>{
+            user.user.token = action.payload.token;
+        },
+        setUser: (user,action)=>{
+            user.user = {
+                ...action.payload,
+                token: user.user.token
+            }
+        },     
+        setCategories: (user,action)=>{
+            user.categories = action.payload;
+        },
+        setProducts: (user,action)=>{
+            user.products = action.payload;
+        },
+        setPage: (user,action)=>{
+            user.page = action.payload.page;
+        },
+        setToast : (user,action)=>{
+            user.toast = {
+                msg: action.payload.msg,
+                show: true,
+                severity: action.payload.severity
+            }
+        },
+        closeToast : (user,actin)=>{
+            user.toast.show = false; 
+        }
     }
 });
 
 
 
-export const {setCategories,setProducts,setPage} = slice.actions;
+export const {setCategories,setProducts,setPage,signInUser,setToken,setUser,setToast,closeToast} = slice.actions;
 export default slice.reducer;

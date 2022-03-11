@@ -1,0 +1,94 @@
+.dropbox{
+    height: fit-content;
+    width: 120px;
+    background-color: white;
+    position: relative;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.arrow {
+    width: 12px;
+    height: 20px;
+   
+    /* right: -1px; */
+    /* transform: rotate(90deg); */
+    overflow: hidden;
+    /* 
+    position: relative;
+    float: left;
+    top: 6px; */
+    position: absolute;
+    top: -13%;
+    left: 50%;
+    transform: translate(-50%, 5%) rotate(90deg);
+    
+}
+  
+.arrow .outer {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.arrow .inner {
+    width: 0;
+    height: 0;
+    border-right: 20px solid white;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 2px;
+}
+.doption{
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 2px;
+}
+.doicon{
+    margin-top: 5px;
+}
+.doname{
+    color: blue;
+    font-size: 15px;
+    margin-left: 5px
+}
+.doption:hover{
+    background-color: rgb(221, 173, 173);
+}
+
+.userDrop-enter{
+    opacity: 0.3;
+    transform-origin: 50% 0%;
+    transform: scale(0);
+}
+.userDrop-enter-active{
+    opacity: 1;
+    transform: scale(1);
+    transition: all 150ms;
+}
+.userDrop-enter-done{
+    transform: scale(1);
+    opacity: 1;
+}
+.userDrop-exit{
+    transform-origin: 0% 0%;
+    transform: scale(1);
+    opacity: 1;
+}
+.userDrop-exit-active{
+    display: none;
+    transition: all 150ms;
+}
+.userDrop-exit-done{
+    transform: scaleY(0.3);
+    opacity: 0.3;
+    display: none;
+}
