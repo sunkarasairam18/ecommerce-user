@@ -1,8 +1,10 @@
 .signin{
     width: 400px;
-    height: 400px;
+    height: fit-content;
     background-color: white;
     border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
 .scross{
     height: 10%;

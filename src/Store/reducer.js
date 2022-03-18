@@ -21,13 +21,13 @@ const slice = createSlice({
         }
     },
     reducers: {
-        signInUser: (user,actin)=>{
+        signInUser: (user,actin)=>{ //If user signs in server sends user data,this reducers sets user data
             user.user = actin.payload;
         },
         setToken: (user,action)=>{
             user.user.token = action.payload.token;
         },
-        setUser: (user,action)=>{
+        setUser: (user,action)=>{  //If user token already in local storage this reducer gets and sets user data
             user.user = {
                 ...action.payload,
                 token: user.user.token

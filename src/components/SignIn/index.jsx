@@ -19,7 +19,7 @@ import "../../common.css";
 import { useDispatch } from "react-redux";
 import { setToast, closeToast, signInUser } from "../../Store/reducer";
 
-const SignIn = ({ setLogin, show }) => {
+const SignIn = ({ setLogin,setSignup }) => {
   const [email, setEmail] = useState("sairam@gmail.com");
   const [showPwd, setShowPwd] = useState(false);
   const [logging, setLoggin] = useState(false);
@@ -31,12 +31,12 @@ const SignIn = ({ setLogin, show }) => {
   const handleClose = () =>{
       
       setLogin(false);
-      setEmail("");
-      setShowPwd(false);
-      setLoggin(false);
-      setPwd("");
-      setErrEmail("");
-      setErrPwd("");
+      // setEmail("");
+      // setShowPwd(false);
+      // setLoggin(false);
+      // setPwd("");
+      // setErrEmail("");
+      // setErrPwd("");
   };
 
   const validateForm = () =>{
@@ -149,6 +149,7 @@ const SignIn = ({ setLogin, show }) => {
           onChange={(e) => setEmail(e.target.value)}
           label="Enter Email Address"
           variant="outlined"
+          
         />
         <FormControl
          sx={{ m: 1, width: "85%" }} 
@@ -158,6 +159,7 @@ const SignIn = ({ setLogin, show }) => {
           <InputLabel
             error={errPwd !== ""}
             htmlFor="outlined-adornment-password"
+            
           >
             Enter Password
           </InputLabel>
@@ -173,7 +175,7 @@ const SignIn = ({ setLogin, show }) => {
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={() => setShowPwd(!showPwd)}
-                  onMouseDown={(e) => e.preventDefault}
+                  onMouseDown={(e) => e.preventDefault()}
                   edge="end"
                 >
                   {showPwd ? <VisibilityOffIcon /> : <VisibilityIcon />}
@@ -213,7 +215,10 @@ const SignIn = ({ setLogin, show }) => {
       <div className="presssignup">
         <div className="psin">
           <div className="psacc">Don't have an account?</div>
-          <div className="psbtn">Sign Up</div>
+          <div className="psbtn" onClick={()=>{
+            handleClose();
+            setSignup(true);
+          }}>Sign Up</div>
         </div>
       </div>
     </div>

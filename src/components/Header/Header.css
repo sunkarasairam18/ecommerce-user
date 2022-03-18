@@ -90,6 +90,7 @@
     flex-direction: column;
     cursor: pointer;
     position: relative;
+    cursor: pointer;
 }
 .uin{
     display: flex;

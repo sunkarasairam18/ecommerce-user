@@ -9,6 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from '@mui/material/Button';
 import Backdrop from '@mui/material/Backdrop';
 import SignIn from '../SignIn';
+import SignUp from '../SignUp';
 import { useSelector,useDispatch } from 'react-redux';
 import { setToast } from '../../Store/reducer';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -18,6 +19,7 @@ import UserDropDown from '../UserDropDown';
 const Header = () => {
     const [search,setSearch] = useState('');
     const [login,setLogin] = useState(false);
+    const [signup,setSignup] = useState(false);
     const token = useSelector(state => state.data.user.token);
     const userName = useSelector(state => state.data.user.userName);
     const dispatch = useDispatch();
@@ -30,7 +32,13 @@ const Header = () => {
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={login}
             >
-                <SignIn setLogin={setLogin} show={login}/>
+                {login && <SignIn setLogin={setLogin} setSignup={setSignup}/>}
+            </Backdrop>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={signup}
+            >
+                {signup && <SignUp setLogin={setLogin} setSignup={setSignup} />}
             </Backdrop>
             <div className="inHeader">
                 <div className="inhl">
@@ -46,7 +54,7 @@ const Header = () => {
                     {!token && <div className="inhrlogin" onClick={()=>setLogin(true)}>
                         Login
                     </div>}
-                    {!token && <div className="inhrsignup">
+                    {!token && <div className="inhrsignup" onClick={()=>setSignup(true)}>
                         Sign Up
                     </div>}
                     
