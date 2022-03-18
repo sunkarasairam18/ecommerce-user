@@ -12,7 +12,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import Joi from "joi-browser";
 import './style.css';
 
 const SignUp = ({setLogin,setSignup}) => {
@@ -28,14 +28,43 @@ const SignUp = ({setLogin,setSignup}) => {
     const [errPwd,setErrP] = useState("");
     const [errPhno,setErrPh] = useState("");
 
+    const [error,setError] = useState({
+
+    });
+
     const [showPwd, setShowPwd] = useState(false);
 
     const [signingup,setSigningup] = useState(false);
+
+    const schema = {
+      fullName: Joi.string().required().label("Full Name"),
+      userName: Joi.string().required().label("User Name"),
+      email: Joi.string().email().required().label("Email"),
+      password: Joi.string().required().label("Password"),
+      phoneNo: Joi.string().max(10).required().label("Phone Number")
+    }
 
     const handleClose = (e) =>{
         e.preventDefault();
         setSignup(false);
 
+    };
+
+    const validateFormProper = () =>{
+      const form = {};
+      form["fullName"] = fullName;
+      form["userName"] = userName;
+      form["email"] = email;
+      form["password"] = password;
+      form["phoneNo"] = phNo;
+      const {error} = Joi.validate(form,schema);
+      if(error){
+        let err = {};
+        for(let item of error.details) err[item.path[0]] = item.message;
+        setError(err);
+        return false;
+      }
+      return true;
     };
 
     const validateForm = () =>{
@@ -68,7 +97,7 @@ const SignUp = ({setLogin,setSignup}) => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        if(!validateForm()){
+        if(!validateFormProper()){
             return;
         }
         // setLoggin(true);
@@ -89,7 +118,7 @@ const SignUp = ({setLogin,setSignup}) => {
             <div className="sutitle">Sign Up</div>
             <div className="suinput">
             
-            <TextField
+            {/* <TextField
                 id="outlined-basic"
                 error={errFullName !== ""}
                 helperText={errFullName}
@@ -157,6 +186,76 @@ const SignUp = ({setLogin,setSignup}) => {
                 variant="outlined"    
                 type="tel"   
                 size="small"         
+            /> */}
+
+            <TextField
+              id="outlined-basic"
+              error={error.fullName}
+              helperText={error.fullName}
+              sx={{ m: 1, width: "85%"}}
+              value={fullName}
+              onChange={(e) => setFullname(e.target.value)}
+              label="Enter Full name"
+              variant="outlined"
+              size="small"
+            />
+            <TextField
+              id="outlined-basic"
+              error={error.userName}
+              helperText={error.userName}
+              sx={{ m: 1, width: "85%" }}
+              value={userName}
+              onChange={(e) => setUsername(e.target.value)}
+              label="Enter User name"
+              variant="outlined"
+              size="small"
+            />
+            <TextField
+              id="outlined-basic"
+              error={error.email}
+              helperText={error.email}
+              sx={{ m: 1, width: "85%" }}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              label="Enter Email Address"
+              variant="outlined"
+              size="small"
+            />
+            <FormControl sx={{ m: 1, width: "85%" }} variant="outlined" size="small">
+                <InputLabel error={error.password} htmlFor="outlined-adornment-password">Enter Password</InputLabel>
+                <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPwd ? 'text' : 'password'}
+                    value={password}
+                    error={error.password}
+                    onChange={(e) => setPwd(e.target.value)}
+                    endAdornment={
+                    <InputAdornment position="end">
+                        <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPwd(!showPwd)}
+                        onMouseDown={(e) => e.preventDefault()}
+                        edge="end"
+                        >
+                        {showPwd ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </IconButton>
+                    </InputAdornment>
+                    }
+                    label="Enter Password"
+                    />
+                   {error.password && <FormHelperText error={error.password} id="component-error-text">{error.password}</FormHelperText>}
+            </FormControl>
+            <TextField
+                id="outlined-basic"
+                error={error.phoneNo}
+                helperText={error.phoneNo}
+                sx={{ m: 1, width: "85%" }}
+                value={phNo}
+                onChange={(e) => setPhno(e.target.value)}
+                label="Enter Phone Number"
+                variant="outlined"    
+                type="tel"   
+                size="small"         
             />
             </div>
             <div className="ssubmit">
@@ -190,7 +289,7 @@ const SignUp = ({setLogin,setSignup}) => {
           <div className="psbtn" onClick={()=>{
             setSignup(false);
             setLogin(true);
-          }}>Sign In</div>
+          }}>Sign In</div>          
         </div>
       </div>
         </div>
