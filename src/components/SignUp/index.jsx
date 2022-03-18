@@ -13,6 +13,10 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import CircularProgress from "@mui/material/CircularProgress";
 import Joi from "joi-browser";
+import { useDispatch } from 'react-redux';
+
+import { axiosInstance } from '../../api/axios';
+import { setToast, signInUser } from "../../Store/reducer";
 import './style.css';
 
 const SignUp = ({setLogin,setSignup}) => {
@@ -36,16 +40,17 @@ const SignUp = ({setLogin,setSignup}) => {
 
     const [signingup,setSigningup] = useState(false);
 
+    const dispatch = useDispatch();
     const schema = {
       fullName: Joi.string().required().label("Full Name"),
       userName: Joi.string().required().label("User Name"),
       email: Joi.string().email().required().label("Email"),
-      password: Joi.string().required().label("Password"),
-      phoneNo: Joi.string().max(10).required().label("Phone Number")
+      password: Joi.string().min(8).required().label("Password"),
+      phoneNo: Joi.string().length(10).required().label("Phone Number")
     }
 
-    const handleClose = (e) =>{
-        e.preventDefault();
+    const handleClose = () =>{
+        
         setSignup(false);
 
     };
@@ -100,19 +105,94 @@ const SignUp = ({setLogin,setSignup}) => {
         if(!validateFormProper()){
             return;
         }
-        // setLoggin(true);
-        // setTimeout(()=>{
-        //     postLogin();
-        // },1000);
+        setSigningup(true);
+        setTimeout(()=>{
+            postLogin();
+        },1000);
     };
 
+
+    const postLogin = async () =>{
+      try {
+          const res = await axiosInstance.post("/user/signup", {
+            fullName: fullName.trim(),
+            userName: userName.trim(),            
+            email: email.trim(),
+            password: password.trim(),
+            contactNumber: phNo.trim(),
+            role: "user"
+          });
+    
+          if (res.status === 201) {
+            const { _id, userName, email, role } = res.data;
+    
+            localStorage.setItem("token", res.headers["x-auth-token"]);
+            const userData = {
+              _id,
+              userName,
+              email,
+              role,
+              token: res.headers["x-auth-token"],
+            };
+            dispatch(signInUser(userData));
+            setSigningup(false);
+            handleClose();
+            dispatch(setToast({msg:"Account created",severity:"success"}));
+            
+    
+            // navigate('/');
+          } 
+          // else if (res.status === 401 || res.status === 403) {
+          //     // dispatch(setToast({msg:"Category Added",severity:"success"}));
+          //     setErrEmail("Invalid Email or Password");
+          //   }else if(res.status === 500){
+          //     handleClose();
+          //   }
+          // else{
+          //     setErrEmail("Loggedin");
+          // }
+        } catch (error) {
+          //   handleClose();
+          const {response,request} = error;
+          if (response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              
+              if(response.status === 403){
+                  // dispatch(setToast({msg:"Somethi",severity:"success"}));
+                  if(response.data === "existed"){
+                    setError({"email":"Account Already Existed"});
+                  }else{
+                    dispatch(setToast({msg:"Invalid Credentials",severity:"error"}));
+                  }
+                  setSigningup(false);
+                  // setErrEmail("Invalid Email or Password");    
+              }else if(response.status === 500){
+                  handleClose();
+                  dispatch(setToast({msg:"Something Went Wrong,Try Later!",severity:"error"}));
+              }
+  
+            } else if (request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              handleClose();
+              dispatch(setToast({msg:"Something Went Wrong,Try Later!",severity:"error"}));
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              handleClose();
+             dispatch(setToast({msg:"Something Went Wrong,Try Later!",severity:"error"}));
+         }
+            
+        }
+    };
 
     return (
         <div className='signup'>
             <div className="scross">
                 <CloseIcon
                 style={{ color: "grey", fontSize: "30px" }}
-                onClick={handleClose}
+                onClick={()=>handleClose()}
                 />
             </div>
             <div className="sutitle">Sign Up</div>

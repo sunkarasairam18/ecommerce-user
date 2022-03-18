@@ -17,7 +17,7 @@ import { CSSTransition } from "react-transition-group";
 import { axiosInstance } from "../../api/axios";
 import "../../common.css";
 import { useDispatch } from "react-redux";
-import { setToast, closeToast, signInUser } from "../../Store/reducer";
+import { setToast, signInUser } from "../../Store/reducer";
 
 const SignIn = ({ setLogin,setSignup }) => {
   const [email, setEmail] = useState("sairam@gmail.com");
