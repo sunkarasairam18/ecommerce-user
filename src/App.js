@@ -15,6 +15,7 @@ import io from 'socket.io-client';
 import HomePage from './containers/HomePage';
 import ProductListPage from './containers/ProductListPage';
 import DisplayProducts from './containers/DisplayProducts';
+import ProductDetailsPage from './containers/ProductDetailsPage/index';
 
 function App() {
   const cat = useSelector(state => state.data.categories);
@@ -73,6 +74,7 @@ function App() {
       <div className='appbody'>
 
         <Routes>
+          <Route path="/:productSlug/:productId/p" element={<ProductDetailsPage/>}/>
           <Route path="/:slug" element={<DisplayProducts/>}/>
           <Route path="/" element={<HomePage/>}/>
         </Routes>

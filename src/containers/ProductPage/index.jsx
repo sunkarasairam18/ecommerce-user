@@ -14,7 +14,6 @@ const ProductPage = ({cid,type}) => {
         try{
             console.log("Cid ",cid,"Type ",type);
             const res = await axiosInstance.get(`/page/${cid}/${type}`);
-            console.log(res);
             if(res.status === 200){
                 const {page} = res.data;
                 console.log("Data : ",res.data);

@@ -9,7 +9,7 @@ const ProductRow = ({productRow,latest,categoryName}) => {
         var row = [];
         for(let item of productRow){
             
-            row.push(<ProductCard name={item.name} url={item.productPictures[0].img} cost={item.price}/>);
+            row.push(<ProductCard name={item.name} url={item.productPictures[0].img} cost={item.price} slug={item.slug} _id={item._id}/>);
             
         }
         return row;

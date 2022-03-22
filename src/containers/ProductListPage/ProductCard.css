@@ -1,5 +1,5 @@
 .productCard{
-    width: 200px;
+    width: 15%;
     background-color: white;
     display: flex;
     align-items: center;
@@ -7,7 +7,16 @@
     /* margin: 3px; */
     padding-top: 10px;
     padding-bottom: 10px;
+    cursor: pointer;
+    margin: 1px;
+    overflow: hidden;
+    text-decoration: none;
+    color: black;
 }
+/* .productCard:hover{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+} */
 .productCardImg{
    width: 150px;
    height: 150px;
@@ -19,6 +28,10 @@
     max-width: 100%;
     max-height: 80%;
     object-fit: contain;
+}
+.zoomproductimg{
+    transform-origin: center;
+    transform: scale(1.05);
 }
 .pname{
     text-align: center;

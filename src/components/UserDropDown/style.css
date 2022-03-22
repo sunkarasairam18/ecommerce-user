@@ -54,14 +54,15 @@
 }
 .doicon{
     margin-top: 5px;
+    margin-left: 5px;
 }
 .doname{
     color: blue;
     font-size: 15px;
-    margin-left: 5px
+    margin-left: 10px
 }
 .doption:hover{
-    background-color: rgb(221, 173, 173);
+    background-color: rgb(240, 230, 230);
 }
 
 .userDrop-enter{
