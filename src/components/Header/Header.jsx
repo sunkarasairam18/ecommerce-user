@@ -8,20 +8,23 @@ import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from '@mui/material/Button';
 import Backdrop from '@mui/material/Backdrop';
+import { useSelector,useDispatch } from 'react-redux';
+
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
-import { useSelector,useDispatch } from 'react-redux';
-import { setToast } from '../../Store/reducer';
+import { setToast,setShowSignIn,setShowSignUp } from '../../Store/reducer';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import UserDropDown from '../UserDropDown';
 
 
 const Header = () => {
     const [search,setSearch] = useState('');
-    const [login,setLogin] = useState(false);
-    const [signup,setSignup] = useState(false);
+    // const [login,setLogin] = useState(false);
+    // const [signup,setSignup] = useState(false);
     const token = useSelector(state => state.data.user.token);
     const userName = useSelector(state => state.data.user.userName);
+    const showSignIn = useSelector(state => state.data.showSignIn);
+    const showSignUp = useSelector(state => state.data.showSignUp);
     const dispatch = useDispatch();
     const [showUserDrop,setShowUserDrop] = useState(false);
 
@@ -30,15 +33,15 @@ const Header = () => {
         <div className='header'>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={login}
+                open={showSignIn}
             >
-                {login && <SignIn setLogin={setLogin} setSignup={setSignup}/>}
+                {showSignIn && <SignIn/>}
             </Backdrop>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={signup}
+                open={showSignUp}
             >
-                {signup && <SignUp setLogin={setLogin} setSignup={setSignup} />}
+                {showSignUp && <SignUp/>}
             </Backdrop>
             <div className="inHeader">
                 <div className="inhl">
@@ -51,10 +54,10 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="inhr">
-                    {!token && <div className="inhrlogin" onClick={()=>setLogin(true)}>
+                    {!token && <div className="inhrlogin" onClick={()=>dispatch(setShowSignIn(true))}>
                         Login
                     </div>}
-                    {!token && <div className="inhrsignup" onClick={()=>setSignup(true)}>
+                    {!token && <div className="inhrsignup" onClick={()=>dispatch(setShowSignUp(true))}>
                         Sign Up
                     </div>}
                     
@@ -71,7 +74,7 @@ const Header = () => {
                                 
                             </div>
                             <div className='udrop'>
-                                <UserDropDown show={showUserDrop}/>
+                                <UserDropDown show={showUserDrop} setShow={setShowUserDrop}/>
                             </div>
                         </div>
                     }

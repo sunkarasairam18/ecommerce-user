@@ -1,6 +1,5 @@
 import React, { useEffect,useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { axiosInstance } from '../../api/axios';
 import './style.css';
 
@@ -29,7 +28,16 @@ const ProductDetailsPage = () => {
     },[productSlug,productId]);
 
     return ( 
-        <div className='pdp'>{JSON.stringify(product)}</div>
+        <div className='pdp'>
+            <div className="pdpin">
+                <div className="pdpinimages">                
+                
+                </div>
+                <div className="pdipininfo">
+
+                </div>
+            </div>
+        </div>
     );
 }
  

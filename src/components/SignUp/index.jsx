@@ -16,10 +16,10 @@ import Joi from "joi-browser";
 import { useDispatch } from 'react-redux';
 
 import { axiosInstance } from '../../api/axios';
-import { setToast, signInUser } from "../../Store/reducer";
+import { setToast, signInUser,setShowSignIn,setShowSignUp } from "../../Store/reducer";
 import './style.css';
 
-const SignUp = ({setLogin,setSignup}) => {
+const SignUp = () => {
     const [fullName,setFullname] = useState("");
     const [userName,setUsername] = useState("");
     const [email,setEmail] = useState("");
@@ -51,7 +51,7 @@ const SignUp = ({setLogin,setSignup}) => {
 
     const handleClose = () =>{
         
-        setSignup(false);
+      dispatch(setShowSignUp(false));
 
     };
 
@@ -367,8 +367,8 @@ const SignUp = ({setLogin,setSignup}) => {
         <div className="psin">
           <div className="psacc">Already have an account?</div>
           <div className="psbtn" onClick={()=>{
-            setSignup(false);
-            setLogin(true);
+            dispatch(setShowSignUp(false));
+            dispatch(setShowSignIn(true));
           }}>Sign In</div>          
         </div>
       </div>

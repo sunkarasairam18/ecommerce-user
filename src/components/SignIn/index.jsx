@@ -17,9 +17,9 @@ import { CSSTransition } from "react-transition-group";
 import { axiosInstance } from "../../api/axios";
 import "../../common.css";
 import { useDispatch } from "react-redux";
-import { setToast, signInUser } from "../../Store/reducer";
+import { setToast, signInUser,setShowSignIn,setShowSignUp } from "../../Store/reducer";
 
-const SignIn = ({ setLogin,setSignup }) => {
+const SignIn = () => {
   const [email, setEmail] = useState("sairam@gmail.com");
   const [showPwd, setShowPwd] = useState(false);
   const [logging, setLoggin] = useState(false);
@@ -29,14 +29,8 @@ const SignIn = ({ setLogin,setSignup }) => {
   const dispatch = useDispatch();
 
   const handleClose = () =>{
+      dispatch(setShowSignIn(false));
       
-      setLogin(false);
-      // setEmail("");
-      // setShowPwd(false);
-      // setLoggin(false);
-      // setPwd("");
-      // setErrEmail("");
-      // setErrPwd("");
   };
 
   const validateForm = () =>{
@@ -217,7 +211,7 @@ const SignIn = ({ setLogin,setSignup }) => {
           <div className="psacc">Don't have an account?</div>
           <div className="psbtn" onClick={()=>{
             handleClose();
-            setSignup(true);
+            dispatch(setShowSignUp(true));
           }}>Sign Up</div>
         </div>
       </div>

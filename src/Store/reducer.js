@@ -18,7 +18,9 @@ const slice = createSlice({
             msg: "",
             show: false,
             severity: ""
-        }
+        },
+        showSignIn: false,
+        showSignUp: false
     },
     reducers: {
         signInUser: (user,actin)=>{ //If user signs in server sends user data,this reducers sets user data
@@ -51,11 +53,27 @@ const slice = createSlice({
         },
         closeToast : (user,actin)=>{
             user.toast.show = false; 
+        },
+        setShowSignIn : (user,action)=>{
+            user.showSignIn = action.payload;
+        },
+        setShowSignUp : (user,action) =>{
+            user.showSignUp = action.payload;
+        },
+        logOut: (user,action) =>{
+            localStorage.clear();
+            user.user = {
+                _id:"",
+                userName:"",
+                email:"",
+                role:"",
+                token:""
+            }
         }
     }
 });
 
 
 
-export const {setCategories,setProducts,setPage,signInUser,setToken,setUser,setToast,closeToast} = slice.actions;
+export const {setCategories,setProducts,setPage,signInUser,setToken,setUser,setToast,closeToast,setShowSignIn,setShowSignUp,logOut} = slice.actions;
 export default slice.reducer;

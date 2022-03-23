@@ -4,8 +4,21 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { CSSTransition } from 'react-transition-group';
+import { logOut } from '../../Store/reducer';
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
 
-const UserDropDown = ({show}) => {
+const UserDropDown = ({show,setShow}) => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
+    const handleLogout = () =>{
+        dispatch(logOut({}));
+        setShow(false);
+        navigate("/");
+    }
+
     return ( 
         <CSSTransition in={show} timeout={800} unmountOnExit classNames="userDrop">
 
@@ -33,7 +46,7 @@ const UserDropDown = ({show}) => {
                             Orders
                         </div>
                     </div>
-                    <div className="doption">
+                    <div className="doption" onClick={handleLogout}>
                         <div className="doicon">
                             <LogoutIcon style={{color:"blue",fontSize:"25px"}}/>
                         </div>
