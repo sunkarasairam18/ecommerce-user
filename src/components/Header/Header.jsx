@@ -15,7 +15,7 @@ import SignUp from '../SignUp';
 import { setToast,setShowSignIn,setShowSignUp } from '../../Store/reducer';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import UserDropDown from '../UserDropDown';
-
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [search,setSearch] = useState('');
@@ -27,7 +27,7 @@ const Header = () => {
     const showSignUp = useSelector(state => state.data.showSignUp);
     const dispatch = useDispatch();
     const [showUserDrop,setShowUserDrop] = useState(false);
-
+    const navigate = useNavigate();
 
     return ( 
         <div className='header'>
@@ -45,8 +45,8 @@ const Header = () => {
             </Backdrop>
             <div className="inHeader">
                 <div className="inhl">
-                    <div className="inhlimg">
-                        FlipKart
+                    <div className="inhlimg" onClick={()=>navigate("/")}>
+                        Shoppy
                     </div>
                     <div className="inhlsearch">
                         <input type="text" className='inhlsbox' placeholder={'search for products'} value={search} onChange={(e)=>setSearch(e.target.value)}/>

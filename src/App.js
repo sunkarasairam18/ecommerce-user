@@ -5,7 +5,7 @@ import MenuHeader from './components/MenuHeader';
 import { setCategories,setUser} from './Store/reducer';
 import { axiosInstance } from './api/axios';
 import { useSelector,useDispatch } from 'react-redux';
-import { Routes,Route } from 'react-router-dom';
+import { Routes,Route,Navigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import Alert from '@mui/material/Alert';
@@ -16,6 +16,7 @@ import HomePage from './containers/HomePage';
 import ProductListPage from './containers/ProductListPage';
 import DisplayProducts from './containers/DisplayProducts';
 import ProductDetailsPage from './containers/ProductDetailsPage/index';
+import Cart from './containers/Cart';
 
 function App() {
   const cat = useSelector(state => state.data.categories);
@@ -75,6 +76,7 @@ function App() {
 
         <Routes>
           <Route path="/:productSlug/:productId/p" element={<ProductDetailsPage/>}/>
+          <Route path="/viewcart" element={token?<Cart/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/:slug" element={<DisplayProducts/>}/>
           <Route path="/" element={<HomePage/>}/>
         </Routes>
