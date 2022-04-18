@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../api/axios";
 import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -20,11 +20,13 @@ const ProductDetailsPage = () => {
 
   const token = useSelector((state) => state.data.user.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const addToCart = () => {
     if (!token) {
       dispatch(setShowSignIn(true));
     } else {
+      navigate('/viewcart');
     }
   };
 
