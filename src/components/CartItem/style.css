@@ -1,0 +1,50 @@
+.citemcon{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.citop{
+    display: flex;
+}
+.ciimg{
+    min-width: 130px;
+    height: 120px;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #f0f0f0;
+    margin-right: 14px;
+    cursor: pointer;
+}
+.ciimg > img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.ciname:hover{
+    color: blueviolet;
+    cursor: pointer;
+}
+.ciprice{
+    font-weight: 700;
+    margin-top: 10px;
+}
+.cilow{
+    display: flex;
+    /* background-color: blue; */
+}
+.ciqnty{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 130px;
+    margin-right: 14px;
+}
+.ciqnum{
+    border: 1px solid black;
+    width: 30px;
+    text-align: center;
+}
+/* .remove{
+    background-color: rgb(231, 228, 228);
+    width: 100px;
+} */

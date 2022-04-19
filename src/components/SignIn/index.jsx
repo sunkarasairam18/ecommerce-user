@@ -17,7 +17,7 @@ import { CSSTransition } from "react-transition-group";
 import { axiosInstance } from "../../api/axios";
 import "../../common.css";
 import { useDispatch } from "react-redux";
-import { setToast, signInUser,setShowSignIn,setShowSignUp } from "../../Store/reducer";
+import { setToast, signInUser,setShowSignIn,setShowSignUp, setCartCount } from "../../Store/reducer";
 
 const SignIn = () => {
   const [email, setEmail] = useState("sairam@gmail.com");
@@ -55,7 +55,7 @@ const SignIn = () => {
         });
   
         if (res.status === 200) {
-          const { _id, userName, email, role } = res.data;
+          const { _id, userName, email, role, cartCount } = res.data;
   
           localStorage.setItem("token", res.headers["x-auth-token"]);
           const userData = {
@@ -66,6 +66,7 @@ const SignIn = () => {
             token: res.headers["x-auth-token"],
           };
           dispatch(signInUser(userData));
+          dispatch(setCartCount(cartCount));
           dispatch(setToast({msg:"Signed In",severity:"success"}));
           setLoggin(false);
           handleClose();

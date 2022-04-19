@@ -2,7 +2,7 @@ import './App.css';
 import { useState,useEffect } from 'react';
 import Header from './components/Header/Header';
 import MenuHeader from './components/MenuHeader';
-import { setCategories,setUser} from './Store/reducer';
+import { setCategories,setUser,setCartCount } from './Store/reducer';
 import { axiosInstance } from './api/axios';
 import { useSelector,useDispatch } from 'react-redux';
 import { Routes,Route,Navigate } from 'react-router-dom';
@@ -59,8 +59,9 @@ function App() {
       
       axiosInstance.get('/user/profile').then(res => {
         if(res.status == 200){
-          const {_id,userName,email,role} = res.data;
+          const {_id,userName,email,role,cartCount} = res.data;
           dispatch(setUser({_id,userName,email,role}));
+          dispatch(setCartCount(cartCount));
         }
       }).catch(err => {
         console.log("Couldnt set up user");

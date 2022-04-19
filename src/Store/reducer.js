@@ -19,6 +19,8 @@ const slice = createSlice({
             show: false,
             severity: ""
         },
+        cart :[],
+        cartCount: NaN,
         showSignIn: false,
         showSignUp: false
     },
@@ -40,6 +42,26 @@ const slice = createSlice({
         },
         setProducts: (user,action)=>{
             user.products = action.payload;
+        },
+        setCart: (user,action)=>{
+            user.cart = action.payload;
+        },  
+        setCartCount: (user,action)=>{
+            user.cartCount = action.payload;
+        },
+        updateCart: (user,action)=>{
+            user.cart.forEach((item,index)=>{
+                if(item._id === action.payload.id){
+                    user.cart[index].quantity += action.payload.qty; 
+                    return;
+                }
+            }); 
+        },
+        delCartItem: (user,action)=>{
+            let newcart = user.cart.filter(function(item){
+                return item._id !== action.payload.id;
+            });
+            user.cart = newcart;
         },
         setPage: (user,action)=>{
             user.page = action.payload.page;
@@ -75,5 +97,5 @@ const slice = createSlice({
 
 
 
-export const {setCategories,setProducts,setPage,signInUser,setToken,setUser,setToast,closeToast,setShowSignIn,setShowSignUp,logOut} = slice.actions;
+export const {setCategories,setProducts,setCart,setCartCount,updateCart,delCartItem,setPage,signInUser,setToken,setUser,setToast,closeToast,setShowSignIn,setShowSignUp,logOut} = slice.actions;
 export default slice.reducer;

@@ -1,9 +1,31 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Button from '@mui/material/Button';
-
+import { useSelector,useDispatch } from 'react-redux';
+import CartItem from '../../components/CartItem';
 import './style.css';
+import { axiosInstance } from '../../api/axios';
+import { setCart,setCartCount } from '../../Store/reducer';
 
 const Cart = () => {
+
+    const dispatch = useDispatch();
+    const cart = useSelector(state => state.data.cart);
+
+    const getCart = async () =>{
+        const res = await axiosInstance.get(`/cart/get`);
+        if(res.status === 200){
+            console.log(res.data);
+            dispatch(setCart(res.data));
+            dispatch(setCartCount(res.data.length));
+        }
+    };
+
+    useEffect(()=>{
+        getCart();
+    },[]);
+
+    
+
     return ( 
         <div className='cartContainer'>
             
@@ -11,20 +33,22 @@ const Cart = () => {
                 <div className="cartitems">
                     <div className="cicontainer">
                         <div className="cartcount">
-                            <h3>My Cart(4)</h3>
+                            <h3>{`My Cart(${cart.length})`}</h3>
+                        </div>
+                        {cart.map(item => 
+                            <div className="cartitem" key={item._id}>
+                                <CartItem item={item}/>
+                            </div>
+                        )}
+                        {/* <div className="cartitem">
+                            <CartItem/>
                         </div>
                         <div className="cartitem">
-
+                            <CartItem/>
                         </div>
                         <div className="cartitem">
-                            
-                        </div>
-                        <div className="cartitem">
-                            
-                        </div>
-                        <div className="cartitem">
-                            
-                        </div>
+                            <CartItem/>
+                        </div> */}
                     </div>
 
                     <div className="ciplaceorder">

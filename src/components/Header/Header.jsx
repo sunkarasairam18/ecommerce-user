@@ -23,11 +23,21 @@ const Header = () => {
     // const [signup,setSignup] = useState(false);
     const token = useSelector(state => state.data.user.token);
     const userName = useSelector(state => state.data.user.userName);
+    const cartCount = useSelector(state => state.data.cartCount);
     const showSignIn = useSelector(state => state.data.showSignIn);
     const showSignUp = useSelector(state => state.data.showSignUp);
     const dispatch = useDispatch();
     const [showUserDrop,setShowUserDrop] = useState(false);
     const navigate = useNavigate();
+
+    const onClicCart = () =>{
+        if(token){
+            navigate('/viewcart');
+            return;
+        }
+        dispatch(setShowSignIn(true));
+
+    }
 
     return ( 
         <div className='header'>
@@ -79,8 +89,8 @@ const Header = () => {
                         </div>
                     }
                     
-                    <div className="inhrcart">
-                        <Badge badgeContent={4} color="warning">
+                    <div className="inhrcart" onClick={onClicCart}>
+                        <Badge badgeContent={token?cartCount:0} color="warning">
                             <ShoppingCartIcon style={{color:"white"}}/>
                         </Badge>
                         <div>Cart</div>

@@ -7,8 +7,10 @@ import FlashOnIcon from "@mui/icons-material/FlashOn";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import StarIcon from "@mui/icons-material/Star";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import { Box } from "@mui/system";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import { setShowSignIn, setShowSignup } from "../../Store/reducer";
+import { setCart, setCartCount, setShowSignIn, setShowSignup } from "../../Store/reducer";
 import { useSelector, useDispatch } from "react-redux";
 import "./style.css";
 
@@ -17,18 +19,14 @@ const ProductDetailsPage = () => {
   const [product, setProduct] = useState();
   const [route, setRoute] = useState();
   const [pic, setPic] = useState();
+  const [loadAdd,setLoadAdd] = useState(false);
+
 
   const token = useSelector((state) => state.data.user.token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const addToCart = () => {
-    if (!token) {
-      dispatch(setShowSignIn(true));
-    } else {
-      navigate('/viewcart');
-    }
-  };
+  
 
   const buyNow = () => {
     if (!token) {
@@ -77,6 +75,36 @@ const ProductDetailsPage = () => {
     return `http://localhost:3000/public/${url}`;
   };
 
+  const addItem = () =>{
+    if(product){
+      setLoadAdd(true);
+      setTimeout(async ()=>{
+        const res = await axiosInstance.post('/cart/add',{
+          cartItems:{
+              product: product._id,
+              quantity: 1,
+              price: product.price
+          },
+        });
+        if (res.status === 201) {
+          setLoadAdd(false);
+          navigate('/viewcart');
+        }else{
+          setLoadAdd(false);
+        }
+      },1000);
+      
+    }
+  };
+
+  const addToCart = () => {
+    if (!token) {
+      dispatch(setShowSignIn(true));
+    } else {
+      addItem();
+    }
+  };
+
   return (
     <div className="pdp">
       {product && (
@@ -102,19 +130,45 @@ const ProductDetailsPage = () => {
 
               {/* action buttons */}
               <div className="buybuttons">
-                <Button
+                {/* <LoadingButton
                   variant="contained"
                   style={{
                     width: "40%",
                     padding: "12px",
                     backgroundColor: "dodgerblue",
                   }}
+                  loading={loadAdd}
                   startIcon={<ShoppingCartIcon />}
                   onClick = {()=>addToCart()}
+                  loadingPosition="start"
                 >
                   ADD TO CART
-                </Button>
-                <Button
+                </LoadingButton> */}
+                <Box sx={{ m: 1, position: "relative", width: "40%"}}>
+                  <Button
+                    variant="contained"
+                    disabled={loadAdd}
+                    sx={{ width: "100%",padding: "12px",height:"90%" }}
+                    onClick={()=>addToCart()}
+                    startIcon={<ShoppingCartIcon />}
+                  >
+                    Add To Cart
+                  </Button>
+                  {loadAdd && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: "green",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-12px",
+                        marginLeft: "-12px",
+                      }}
+                    />
+                  )}
+                </Box>
+                {/* <Button
                   variant="contained"
                   style={{
                     width: "40%",
@@ -125,7 +179,30 @@ const ProductDetailsPage = () => {
                   onClick = {()=>buyNow()}
                 >
                   BUY NOW
-                </Button>
+                </Button> */}
+                <Box sx={{ m: 1, position: "relative", width: "40%" }}>
+                  <Button
+                    variant="contained"
+                    // disabled={loadAdd}
+                    sx={{ width: "100%",padding: "12px",height:"90%" }}                    
+                    startIcon={<FlashOnIcon />}
+                  >
+                    BUY NOW
+                  </Button>
+                  {/* {loadAdd && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: "green",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-12px",
+                        marginLeft: "-12px",
+                      }}
+                    />
+                  )} */}
+                </Box>
               </div>
             </div>
           </div>
