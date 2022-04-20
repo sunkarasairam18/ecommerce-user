@@ -5,6 +5,8 @@ import CartItem from '../../components/CartItem';
 import './style.css';
 import { axiosInstance } from '../../api/axios';
 import { setCart,setCartCount } from '../../Store/reducer';
+import { SettingsInputAntennaTwoTone } from '@mui/icons-material';
+import EmptyCart from './EmptyCart';
 
 const Cart = () => {
 
@@ -24,12 +26,18 @@ const Cart = () => {
         getCart();
     },[]);
 
+    const total = () =>{
+        let sum = 0;
+        for(let i = 0;i<cart.length;i++)
+            sum += cart[i].price*cart[i].quantity;
+        return sum;
+    }
     
 
     return ( 
         <div className='cartContainer'>
-            
-            <div className="cincon">
+            {cart.length>0?
+            (<div className="cincon">
                 <div className="cartitems">
                     <div className="cicontainer">
                         <div className="cartcount">
@@ -40,15 +48,7 @@ const Cart = () => {
                                 <CartItem item={item}/>
                             </div>
                         )}
-                        {/* <div className="cartitem">
-                            <CartItem/>
-                        </div>
-                        <div className="cartitem">
-                            <CartItem/>
-                        </div>
-                        <div className="cartitem">
-                            <CartItem/>
-                        </div> */}
+                        
                     </div>
 
                     <div className="ciplaceorder">
@@ -58,9 +58,44 @@ const Cart = () => {
                     </div>
                 </div>
                 <div className="carttotal">
-sdf
+                    <div className="pricesummary">
+                        <div>
+                            PRICE DETAILS
+                        </div>
+                    </div>
+                    <div className="pricecharges">
+                        <div className="pricerow">
+                            <div className='chargesitem'>
+                                {`Price (${cart.length} ${cart.length>1?"items":"item"})`}
+                            </div>
+                            <div className='chargescost' style={{fontWeight:"600"}}>
+                                {`₹ ${total().toLocaleString("en-US")}`}
+                            </div>
+                        </div>
+                        <div className="pricerow">
+                            <div>
+                                Delivery Charges
+                            </div>
+                            <div>
+                                FREE
+                            </div>
+                        </div>
+                    </div>
+                    <div className="totalamount">
+                        {/* <div className="pricerow">
+                            
+                        </div> */}
+                        <div>
+                                Total Amount
+                            </div>
+                            <div>
+                                {`₹ ${total().toLocaleString("en-US")}`}
+                            </div>
+                    </div>
                 </div>
-            </div>
+            </div>):(
+                <EmptyCart/>
+            )}
         </div>
      );
 }

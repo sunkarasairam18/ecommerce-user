@@ -20,7 +20,7 @@ const slice = createSlice({
             severity: ""
         },
         cart :[],
-        cartCount: NaN,
+        cartCount: 0,
         showSignIn: false,
         showSignUp: false
     },

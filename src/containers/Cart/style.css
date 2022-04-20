@@ -55,8 +55,43 @@
 }
 .carttotal{
     width: 33%;
-    height: 250px;
+    height: 240px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
+}
+.pricesummary{
+    color: grey;
+    font-weight: 700;
+    /* height: 100px;
+    padding: 80px; */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    border-bottom: 1px solid lightgrey;
+    font-size: 18px;
+
+}
+.pricecharges{
+    min-height: 60px;
+    padding: 20px;
+    font-size: 18px;
+}
+.pricerow{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.totalamount{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    height: 40px;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

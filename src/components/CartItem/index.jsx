@@ -8,6 +8,7 @@ import { axiosInstance } from '../../api/axios';
 import { useDispatch } from 'react-redux';
 import { setCart,setCartCount,updateCart,delCartItem } from '../../Store/reducer';
 import { useSelector } from 'react-redux';
+import { setToast } from '../../Store/reducer';
 
 import './style.css';
 import { useNavigate } from 'react-router-dom';
@@ -42,6 +43,7 @@ const CartItem = ({item}) => {
                 
                 if (res.status === 201) {
                     console.log(res.data);
+                    // dispatch(setToast({msg:`You've Changed "${item.name.length>10?item.name.substring(0,10)+"...":item.name}" quantity to ${res.data.quantity}`,severity:"success"}));
                     // dispatch(setCart(res.data));
                     // dispatch(setCartCount(res.data.length));
                     dispatch(updateCart({id: item._id,qty: i}));
@@ -64,7 +66,9 @@ const CartItem = ({item}) => {
                 if (res.status === 201) {
                     // dispatch(setCart(res.data));
                     // dispatch(setCartCount(res.data.length));
+                    const { name } = item;
                     dispatch(delCartItem({id:item._id}));
+                    dispatch(setToast({msg:`Item "${name.length>10?name.substring(0,10)+"...":name}" has removed`,severity:"success"}));
                     dispatch(setCartCount(cartCount-1));
                     setUpdating(false);
                 }else setUpdating(false);
