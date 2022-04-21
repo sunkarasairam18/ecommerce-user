@@ -36,7 +36,10 @@ const slice = createSlice({
                 ...action.payload,
                 token: user.user.token
             }
-        },     
+        },
+        setUpdatedUser: (user,action)=>{
+            user.user = action.payload;
+        },  
         setCategories: (user,action)=>{
             user.categories = action.payload;
         },
@@ -97,5 +100,5 @@ const slice = createSlice({
 
 
 
-export const {setCategories,setProducts,setCart,setCartCount,updateCart,delCartItem,setPage,signInUser,setToken,setUser,setToast,closeToast,setShowSignIn,setShowSignUp,logOut} = slice.actions;
+export const {setCategories,setProducts,setCart,setCartCount,updateCart,delCartItem,setPage,signInUser,setToken,setUser,setUpdatedUser,setToast,closeToast,setShowSignIn,setShowSignUp,logOut} = slice.actions;
 export default slice.reducer;
