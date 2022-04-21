@@ -1,11 +1,10 @@
-import React,{useState,useEffect} from 'react';
+import React,{useEffect} from 'react';
 import Button from '@mui/material/Button';
 import { useSelector,useDispatch } from 'react-redux';
 import CartItem from '../../components/CartItem';
 import './style.css';
 import { axiosInstance } from '../../api/axios';
 import { setCart,setCartCount } from '../../Store/reducer';
-import { SettingsInputAntennaTwoTone } from '@mui/icons-material';
 import EmptyCart from './EmptyCart';
 
 const Cart = () => {
@@ -16,7 +15,6 @@ const Cart = () => {
     const getCart = async () =>{
         const res = await axiosInstance.get(`/cart/get`);
         if(res.status === 200){
-            console.log(res.data);
             dispatch(setCart(res.data));
             dispatch(setCartCount(res.data.length));
         }

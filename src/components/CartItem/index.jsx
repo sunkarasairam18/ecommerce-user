@@ -5,10 +5,8 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Button from '@mui/material/Button';
 import { axiosInstance } from '../../api/axios';
-import { useDispatch } from 'react-redux';
-import { setCart,setCartCount,updateCart,delCartItem } from '../../Store/reducer';
-import { useSelector } from 'react-redux';
-import { setToast } from '../../Store/reducer';
+import { useDispatch,useSelector } from 'react-redux';
+import { setCartCount,updateCart,delCartItem,setToast } from '../../Store/reducer';
 
 import './style.css';
 import { useNavigate } from 'react-router-dom';
@@ -105,7 +103,7 @@ const CartItem = ({item}) => {
                     </IconButton>
                 </div>
                 <div className="remove">
-                    <Button variant="text" style={{fontSize:"15px",fontWeight:"bold",color: updating?'lightgrey':'rgb(82, 66, 66)'}} disabled={updating} onClick={()=>delItem()}>Remove</Button>
+                    <Button variant="outlined" style={{fontSize:"15px",fontWeight:"bold",color: updating?'lightgrey':'rgb(82, 66, 66)'}} disabled={updating} onClick={()=>delItem()}>Remove</Button>
                 </div>
             </div>
         </div>

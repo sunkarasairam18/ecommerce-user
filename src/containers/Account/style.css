@@ -1,0 +1,66 @@
+.account{
+    background-color: aliceblue;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.abox{
+    height: 95%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.abtitle{
+    font-size: 30px;
+    font-weight: 600;
+    height: 70px;
+    width: 95%;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+}
+.aboptions{
+    width: 95%;
+    height: 200px;    
+}
+.aboptboxs{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.adoptbox{
+    display: flex;
+    align-items: center;
+    width: 250px;
+    height: 100px;
+    border-radius: 10px;
+    border: 1px solid rgb(150, 148, 148);
+}
+.adoptbox:hover{
+    background-color: rgb(225, 223, 223);
+    cursor: pointer;
+}
+.boximg{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60%;
+
+}
+.boxinfo{
+    width: 70%;
+    height: 60%;
+}
+.boxhead{
+    font-weight: 700;
+}
+.boxcontent{
+    margin-top: 5px;
+    color: grey;
+    font-weight: 500;
+}

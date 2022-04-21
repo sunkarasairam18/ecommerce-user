@@ -1,0 +1,54 @@
+.addresses{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.addressesbox{
+    height: 95%;
+    width: 45%;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.addrestitle{
+    
+    
+    height: 70px;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.addreslist{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    overflow: scroll
+}
+.noaddress{
+    width: 100%;
+    display: grid;
+    place-items: center;
+    height: 100%;
+}
+.additem{
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.additem:hover{
+    background-color: lightgrey;
+}
+.addititle{
+    font-size: 17px;
+    font-weight: 600;
+}

@@ -30,12 +30,12 @@ const UserDropDown = ({show,setShow}) => {
                 </div>
                 
                 <div className="doptions">
-                    <div className="doption">
+                    <div className="doption" onClick={()=>navigate("/account")}>
                         <div className="doicon">
                             <AccountCircleIcon style={{color:"blue",fontSize:"25px"}}/>
                         </div>
                         <div className="doname">
-                            My Profile
+                            Account
                         </div>
                     </div>
                     <div className="doption">
