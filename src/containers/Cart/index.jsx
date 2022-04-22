@@ -6,10 +6,12 @@ import './style.css';
 import { axiosInstance } from '../../api/axios';
 import { setCart,setCartCount } from '../../Store/reducer';
 import EmptyCart from './EmptyCart';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const cart = useSelector(state => state.data.cart);
 
     const getCart = async () =>{
@@ -50,7 +52,7 @@ const Cart = () => {
                     </div>
 
                     <div className="ciplaceorder">
-                        <Button variant="contained" style={{backgroundColor:"dodgerblue",fontWeight:"600",marginRight:"10px",height:"40px",paddingLeft:"30px",paddingRight:"30px"}}>
+                        <Button variant="contained" onClick={()=>navigate('/confirmaddress')} style={{backgroundColor:"dodgerblue",fontWeight:"600",marginRight:"10px",height:"40px",paddingLeft:"30px",paddingRight:"30px"}}>
                             Place Order
                         </Button>
                     </div>

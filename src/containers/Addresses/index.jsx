@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { Button } from "@mui/material";
 import { axiosInstance } from '../../api/axios';
 import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import AddPop from './AddPop';
 import box from '../../images/pin.png';
@@ -12,6 +13,7 @@ const Addresses = () => {
     const [addresList,setList] = useState([]);
     const [showPop,setPop] = useState(false);
     const [edititem,setEitem] = useState();
+    const [circle,setCir] = useState(true);
 
 
     useEffect(()=>{
@@ -19,6 +21,11 @@ const Addresses = () => {
             setEitem();
         }
     },[showPop]);
+
+    useEffect(()=>{
+        setTimeout(()=>setCir(false),1000);
+    },[]);
+
 
     const getList = async () =>{
         try{
@@ -42,6 +49,12 @@ const Addresses = () => {
                 open={showPop}
                 >
                 {showPop && <AddPop color="inherit" setPop={setPop} address={edititem}  setList={setList}/>}
+            </Backdrop>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={circle}
+                >
+                <CircularProgress size="6rem" color="inherit" />
             </Backdrop>
             <div className="addressesbox">
                 <div className="addrestitle">

@@ -20,6 +20,7 @@ import Cart from './containers/Cart';
 import Account from './containers/Account';
 import Addresses from './containers/Addresses';
 import EditLogin from './containers/EditLogin';
+import ConfirmAddress from './containers/ConfirmAddress';
 
 function App() {
   const cat = useSelector(state => state.data.categories);
@@ -83,7 +84,8 @@ function App() {
           <Route path="/viewcart" element={token?<Cart/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/account/editaddresses" element={token?<Addresses/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/account/editlogin" element={token?<EditLogin/>:<Navigate to="/" replace={true}/>}/>
-
+          <Route path="/confirmaddress" element={token?<ConfirmAddress/>:<Navigate to="/" replace={true}/>}/>
+          
           <Route path="/account" element={token?<Account/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/:slug" element={<DisplayProducts/>}/>
           <Route path="/" element={<HomePage/>}/>

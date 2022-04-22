@@ -77,7 +77,7 @@ const AddPop = ({setPop,address,setList}) => {
             </div>
             <div style={{width:"90%",marginTop:"15px"}}>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                    <TextField label="Pincode" variant="filled" style={{width:"48%"}} value={pincode} onChange={(e)=>setPincode(e.target.value)}/>
+                    <TextField label="Pincode" variant="filled" style={{width:"48%"}} value={pincode} placeholder="6-digit [0-9]" onChange={(e)=>setPincode(e.target.value)}/>
                     <TextField label="Locality" variant="filled" style={{width:"48%"}} value={loc} onChange={(e)=>setLoc(e.target.value)}/>
                 </div>
             </div>

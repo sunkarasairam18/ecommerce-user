@@ -3,11 +3,12 @@ import './style.css'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Box } from "@mui/system";
-import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../api/axios';
 import { useDispatch } from 'react-redux';
 import { setUpdatedUser,setToast } from '../../Store/reducer';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const EditLogin = () => {
     const [saving,setSave] = useState(false);
@@ -22,6 +23,12 @@ const EditLogin = () => {
     const dispatch = useDispatch();
     const [newPhelper,setNph] = useState("");
     const [oldPhelper,setOph] = useState("");
+
+    const [circle,setCir] = useState(true);
+
+    useEffect(()=>{
+        setTimeout(()=>setCir(false),1000);
+    },[]);
 
     const getProfile = async() =>{
         try{
@@ -47,10 +54,13 @@ const EditLogin = () => {
                     setSave(false);
                     return;
                 }
-                if(!oldPwd.trim()){
-                    setOph("Enter Old Password");
-                    setSave(false);
-                    return;
+                if(newPwd.trim() && renPwd.trim() && newPwd.trim() === renPwd.trim()){
+                    if(!oldPwd){
+                        
+                        setOph("Enter Old Password");
+                        setSave(false);
+                        return;
+                    }
                 }
                 
                 let ob = {
@@ -87,6 +97,12 @@ const EditLogin = () => {
 
     return (
         <div className='editlogin'>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={circle}
+                >
+                <CircularProgress size="6rem" color="inherit" />
+            </Backdrop>
             <div className="elbox">
             <div style={{fontSize:"30px",fontWeight:"600"}}>{"Login & Security"}</div>
             <TextField label="Full Name" value={fullName} variant="filled" className='eldit' onChange={(e)=>setFn(e.target.value)}/>
@@ -95,7 +111,7 @@ const EditLogin = () => {
             <TextField label="Old Password" value={oldPwd} type="password" variant="filled" placeholder='Required for password Change' error={oldPhelper} helperText={oldPhelper} className='eldit' onChange={(e)=>setOp(e.target.value)}/>
             <div style={{display:"flex",width:"100%",justifyContent:"space-between"}} className='eldit'>
                 <TextField label="New Password" value={newPwd} type="password" variant="filled" placeholder="For password Change" error={newPhelper} helperText={newPhelper} style={{width:"48%"}} onChange={(e)=>setNp(e.target.value)}/>
-                <TextField label="Reenter New Password" value={renPwd} type="password" variant="filled"  placeholder="For password Change" style={{width:"48%"}} onChange={(e)=>setRnp(e.target.value)}/>
+                <TextField label="Re-enter New Password" value={renPwd} type="password" variant="filled"  placeholder="For password Change" style={{width:"48%"}} onChange={(e)=>setRnp(e.target.value)}/>
             </div>
             <TextField label="Contact Number" value={phNo} variant="filled" className='eldit' onChange={(e)=>setPhno(e.target.value)}/>
             <Box sx={{ position: "relative", width: "150px" }}>
