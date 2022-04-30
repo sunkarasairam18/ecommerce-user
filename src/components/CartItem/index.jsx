@@ -79,7 +79,7 @@ const CartItem = ({item}) => {
             
             <div className="citop">
                 <div className="ciimg" onClick={()=>navigate(`/${item.slug}/${item._id}/p`)}>
-                    <img src={`http://localhost:3000/public/${item.img}`} alt="pic"/>
+                    <img src={`https://mern-ecommerce-products-images.s3.amazonaws.com/${item.img}`} alt="pic"/>
                 </div>
                 <div className="ciinfo">
                     <div className="ciname" onClick={()=>navigate(`/${item.slug}/${item._id}/p`)}>

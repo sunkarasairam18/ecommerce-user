@@ -72,7 +72,7 @@ const ProductDetailsPage = () => {
   }, [product]);
 
   const generatePublicUrl = (url) => {
-    return `http://localhost:3000/public/${url}`;
+    return `https://mern-ecommerce-products-images.s3.amazonaws.com/${url}`;
   };
 
   const addItem = () =>{
