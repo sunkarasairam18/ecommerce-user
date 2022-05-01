@@ -15,13 +15,14 @@
     align-items: center;
 }
 .addrestitle{
-    
-    
     height: 70px;
     width: 95%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.addiaddres{
+    margin-top: 10px;
 }
 .addreslist{
     width: 100%;

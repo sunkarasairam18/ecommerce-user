@@ -20,13 +20,18 @@ const ProductDetailsPage = () => {
   const [route, setRoute] = useState();
   const [pic, setPic] = useState();
   const [loadAdd,setLoadAdd] = useState(false);
+  const [props,setProps] = useState();
+
+  useEffect(()=>{
+    if(pic){
+      setProps({width: 400, height: 250, zoomWidth: 500,img: pic});
+    }
+  },[pic]);
 
 
   const token = useSelector((state) => state.data.user.token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  
 
   const buyNow = () => {
     if (!token) {
@@ -115,17 +120,19 @@ const ProductDetailsPage = () => {
                 <div
                   className="thumbnail"
                   onMouseEnter={() => setPic(thumb.img)}
+                  style={{border: thumb.img===pic?"1px solid blue":"",marginBottom:"5px"}}
                 >
                   <img src={generatePublicUrl(thumb.img)} alt={thumb.img} />
                 </div>
               ))}
             </div>
             <div className="productDescContainer">
-              <div className="productDescImgContainer">
+              <div className="productDescImgContainer img-zoom-container">
                 <img
                   src={generatePublicUrl(pic)}
                   alt={`${product.productPictures[0].img}`}
                 />
+                
               </div>
 
               {/* action buttons */}

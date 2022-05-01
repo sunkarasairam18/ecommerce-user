@@ -42,6 +42,10 @@ const Addresses = () => {
         getList();
     },[]);
 
+    const properStr = (s)=>{
+        return s.length>70?s.slice(0,70)+"...":s;
+    }
+
     return ( 
         <div className="addresses">
             <Backdrop
@@ -75,7 +79,7 @@ const Addresses = () => {
                                 {`${name}, ${mobileNumber}`}
                             </div>
                             <div className="addiaddres">
-                                {`${address},${locality},${cityDistrictTown},${state} - ${pinCode}`}
+                                {properStr(`${address},${locality},${cityDistrictTown},${state} - ${pinCode}`)}
                             </div>
                         </div>
                     ):(<div style={{height:"200px",display:"grid",placeItems:"center",border:"1px solid lightgrey",borderRadius:"10px",paddingLeft:"30px",paddingRight:"30px"}}>

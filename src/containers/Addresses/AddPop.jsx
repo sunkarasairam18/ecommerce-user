@@ -71,28 +71,28 @@ const AddPop = ({setPop,address,setList}) => {
             </div>
             <div style={{width:"90%",marginTop:"15px"}}>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                    <TextField label="Name" variant="filled" style={{width:"48%"}} value={name} onChange={(e)=>setName(e.target.value)}/>
-                    <TextField label="Mobile Number" variant="filled" style={{width:"48%"}} value={phNo} onChange={(e)=>setPhno(e.target.value)}/>
+                    <TextField label="Name" variant="outlined" style={{width:"48%"}} value={name} onChange={(e)=>setName(e.target.value)}/>
+                    <TextField label="Mobile Number" variant="outlined" style={{width:"48%"}} value={phNo} onChange={(e)=>setPhno(e.target.value)}/>
                 </div>
             </div>
             <div style={{width:"90%",marginTop:"15px"}}>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                    <TextField label="Pincode" variant="filled" style={{width:"48%"}} value={pincode} placeholder="6-digit [0-9]" onChange={(e)=>setPincode(e.target.value)}/>
-                    <TextField label="Locality" variant="filled" style={{width:"48%"}} value={loc} onChange={(e)=>setLoc(e.target.value)}/>
+                    <TextField label="Pincode" variant="outlined" style={{width:"48%"}} value={pincode} placeholder="6-digit [0-9]" onChange={(e)=>setPincode(e.target.value)}/>
+                    <TextField label="Locality" variant="outlined" style={{width:"48%"}} value={loc} onChange={(e)=>setLoc(e.target.value)}/>
                 </div>
             </div>
             <div style={{width:"90%",marginTop:"15px"}}>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                <TextField label="Address" variant="filled" style={{width:"100%"}} value={addr} onChange={(e)=>setAddr(e.target.value)}/>
+                <TextField label="Address" variant="outlined" style={{width:"100%"}} value={addr} onChange={(e)=>setAddr(e.target.value)}/>
                 </div>
             </div>
             <div style={{width:"90%",marginTop:"15px"}}>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                    <TextField label="City/District/Town" variant="filled" style={{width:"48%"}} value={city} onChange={(e)=>setCity(e.target.value)}/>
-                    <TextField label="State" variant="filled" style={{width:"48%"}} value={state} onChange={(e)=>setStat(e.target.value)}/>
+                    <TextField label="City/District/Town" variant="outlined" style={{width:"48%"}} value={city} onChange={(e)=>setCity(e.target.value)}/>
+                    <TextField label="State" variant="outlined" style={{width:"48%"}} value={state} onChange={(e)=>setStat(e.target.value)}/>
                 </div>
             </div>
-            <div style={{width:"90%",marginTop:"20px"}}>
+            <div style={{width:"90%",marginTop:"30px"}}>
                 {/* <Button variant="outlined">Outlined</Button> */}
                 <Box sx={{ position: "relative", width: "40%" }}>
                     <Button

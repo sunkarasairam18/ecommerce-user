@@ -27,8 +27,9 @@
     margin-bottom: 20px;
 }
 .cathelp{
-    font-size: 15px;
+    font-size: small;
     font-weight: 400;
+    /* font-style: italic; */
 }
 .currentadd{
     width: 220px;

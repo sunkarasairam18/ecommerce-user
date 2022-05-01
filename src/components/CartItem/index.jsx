@@ -66,7 +66,7 @@ const CartItem = ({item}) => {
                     // dispatch(setCartCount(res.data.length));
                     const { name } = item;
                     dispatch(delCartItem({id:item._id}));
-                    dispatch(setToast({msg:`Item "${name.length>10?name.substring(0,10)+"...":name}" has removed`,severity:"success"}));
+                    dispatch(setToast({msg:`Item "${name.length>12?name.substring(0,12)+"...":name}" has removed`,severity:"success"}));
                     dispatch(setCartCount(cartCount-1));
                     setUpdating(false);
                 }else setUpdating(false);
