@@ -6,11 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import SelectAddPop from './SelectAddPop';
 import Backdrop from '@mui/material/Backdrop';
 import OrderProcess from '../../components/OrderProcess';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ConfirmAddress = () => {
     const [selected,setSelect] = useState({});
     const navigate = useNavigate();
     const [selectPop,setSelPop] = useState(false);
+    const [circle,setCir] = useState(false);
 
     const getSelect = async () =>{
         const res = await axiosInstance.get('/address/get/selectd');
@@ -23,6 +25,14 @@ const ConfirmAddress = () => {
         getSelect();
     },[]);
 
+    const deliverHere = (e) =>{
+        e.preventDefault();
+        setCir(true);
+        setTimeout(()=>{
+            navigate('/confirmorder',{state: selected});
+        },500);
+    }
+
     return ( 
         <div className='confirmadd'>
             <Backdrop
@@ -30,6 +40,12 @@ const ConfirmAddress = () => {
                 open={selectPop}                
                 >
                 {selectPop && <SelectAddPop close={setSelPop} selAdd={setSelect} id={selected._id}/>}
+            </Backdrop>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={circle}
+                >
+                <CircularProgress size="6rem" color="inherit" />
             </Backdrop>
             <div className="conaddbox">
                 <div className="status">
@@ -60,7 +76,7 @@ const ConfirmAddress = () => {
                         {selected.pinCode}
                     </div>
                     
-                    <Button variant="contained" sx={{marginTop:"10px",width:"100%",backgroundColor:"dodgerblue",textTransform:"none",fontSize:"13px"}}>Deliver to this Address</Button>
+                    <Button variant="contained" sx={{marginTop:"10px",width:"100%",backgroundColor:"dodgerblue",textTransform:"none",fontSize:"13px"}} onClick={deliverHere}>Deliver to this Address</Button>
                     <div style={{display:"flex",justifyContent:"space-between"}}>
                         <Button variant="contained" sx={{marginTop:"10px",width:"48%",backgroundColor:"rgb(88, 170, 251)",textTransform:"none",fontSize:"13px"}} onClick={()=>setSelPop(true)}>Choose</Button>
                         <Button variant="contained" sx={{marginTop:"10px",width:"48%",backgroundColor:"rgb(88, 170, 251)",textTransform:"none",fontSize:"13px"}} onClick={()=>navigate("/account/editaddresses")}>Create</Button>

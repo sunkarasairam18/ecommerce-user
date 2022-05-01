@@ -1,0 +1,107 @@
+.confirmorder{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+.cobox{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.codetails{
+    width: 100%;
+    height: 100%;
+    min-width: 700px;
+   
+    display: flex;
+    justify-content: space-between;
+}
+.coaddress{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    min-height: 50px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.coship{
+    width: 20%;
+    font-weight: 600;
+    color: rgb(61, 60, 60);
+}
+.coaddtext{
+    width: 75%;
+    color: rgb(61, 60, 60);
+}
+.coitems{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.coitem{
+    display: flex;
+    padding: 5px;
+    min-height: 20px;
+    margin-bottom: 10px;
+}
+.coiimg{
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    text-align: center;
+    margin-right: 10px;
+    border: 1px solid #f0f0f0;
+}
+.coiimg > img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.coidetails{
+    display: flex;
+    flex-direction: column;
+}
+.coidname{
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.coidprice{
+    color: red;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.coidq{
+    display: flex;
+    margin-bottom: 10px;
+    
+}
+.coprice{
+    width: 28%;
+    min-width: 200px;
+    max-height: 250px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+   
+}
+.coprow{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: medium;
+}
