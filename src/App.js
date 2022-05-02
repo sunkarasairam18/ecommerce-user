@@ -10,6 +10,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import Alert from '@mui/material/Alert';
 import { closeToast } from './Store/reducer';
+import YourOrders from './containers/YourOrders';
 
 import io from 'socket.io-client';
 import HomePage from './containers/HomePage';
@@ -85,6 +86,7 @@ function App() {
           <Route path="/viewcart" element={token?<Cart/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/account/editaddresses" element={token?<Addresses/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/account/editlogin" element={token?<EditLogin/>:<Navigate to="/" replace={true}/>}/>
+          <Route path="/account/orders" element={token?<YourOrders/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/confirmaddress" element={token?<ConfirmAddress/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/confirmorder" element={token?<CofirmOrder/>:<Navigate to="/" replace={true}/>}/>
           <Route path="/account" element={token?<Account/>:<Navigate to="/" replace={true}/>}/>

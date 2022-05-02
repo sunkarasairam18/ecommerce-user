@@ -38,7 +38,7 @@ const UserDropDown = ({show,setShow}) => {
                             Account
                         </div>
                     </div>
-                    <div className="doption">
+                    <div className="doption" onClick={()=>{navigate("/account/orders");setShow(false);}}>
                         <div className="doicon">
                             <LocalShippingIcon style={{color:"blue",fontSize:"25px"}}/>
                         </div>

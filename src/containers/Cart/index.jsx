@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import Button from '@mui/material/Button';
 import { useSelector,useDispatch } from 'react-redux';
 import CartItem from '../../components/CartItem';
@@ -7,11 +7,14 @@ import { axiosInstance } from '../../api/axios';
 import { setCart,setCartCount } from '../../Store/reducer';
 import EmptyCart from './EmptyCart';
 import { useNavigate } from 'react-router-dom';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Cart = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [circle,setCir] = useState(true);
     const cart = useSelector(state => state.data.cart);
 
     const getCart = async () =>{
@@ -21,6 +24,12 @@ const Cart = () => {
             dispatch(setCartCount(res.data.length));
         }
     };
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            setCir(false)
+        },1000);
+    },[]);
 
     useEffect(()=>{
         getCart();
@@ -36,6 +45,12 @@ const Cart = () => {
 
     return ( 
         <div className='cartContainer'>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={circle}
+                >
+                <CircularProgress size="6rem" color="inherit" />
+            </Backdrop>
             {cart.length>0?
             (<div className="cincon">
                 <div className="cartitems">

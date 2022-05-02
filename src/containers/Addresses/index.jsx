@@ -62,7 +62,7 @@ const Addresses = () => {
             </Backdrop>
             <div className="addressesbox">
                 <div className="addrestitle">
-                    <div style={{fontSize:"30px",fontWeight:"600"}}>
+                    <div style={{fontSize:"40px",fontWeight:"600"}}>
                         Your Addresses
                     </div>
                     <Button variant="outlined" startIcon={<AddIcon />} style={{height:"fit-content",textTransform:"none"}} onClick={()=>setPop(true)}>

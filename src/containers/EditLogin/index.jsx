@@ -104,7 +104,7 @@ const EditLogin = () => {
                 <CircularProgress size="6rem" color="inherit" />
             </Backdrop>
             <div className="elbox">
-            <div style={{fontSize:"30px",fontWeight:"600"}}>{"Login & Security"}</div>
+            <div style={{fontSize:"40px",fontWeight:"600"}}>{"Login & Security"}</div>
             <TextField label="Full Name" value={fullName} variant="filled" className='eldit' onChange={(e)=>setFn(e.target.value)}/>
             <TextField label="User Name" value={userName} variant="filled" className='eldit' onChange={(e)=>setUn(e.target.value)}/>
             <TextField label="Email" value={email} variant="filled" className='eldit' onChange={(e)=>setEmail(e.target.value)}/>
