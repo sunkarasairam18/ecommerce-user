@@ -46,3 +46,7 @@
     background-color: blueviolet;
     color: white;
 }
+.blur{
+    opacity: 0.8;
+    color: rgb(167, 159, 159);
+}

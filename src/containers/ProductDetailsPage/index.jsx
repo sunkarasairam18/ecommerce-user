@@ -20,7 +20,10 @@ const ProductDetailsPage = () => {
   const [route, setRoute] = useState();
   const [pic, setPic] = useState();
   const [loadAdd,setLoadAdd] = useState(false);
+  const [loadBuy,setLoadBuy] = useState(false);
   const [props,setProps] = useState();
+
+  
 
   useEffect(()=>{
     if(pic){
@@ -33,9 +36,11 @@ const ProductDetailsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const buyNow = () => {
-    if (!token) {
-      dispatch(setShowSignIn(true));
+  const getCart = async () =>{
+    const res = await axiosInstance.get(`/cart/get`);
+    if(res.status === 200){
+        dispatch(setCart(res.data));
+        dispatch(setCartCount(res.data.length));
     }
   };
 
@@ -93,6 +98,7 @@ const ProductDetailsPage = () => {
         });
         if (res.status === 201) {
           setLoadAdd(false);
+          
           navigate('/viewcart');
         }else{
           setLoadAdd(false);
@@ -107,6 +113,36 @@ const ProductDetailsPage = () => {
       dispatch(setShowSignIn(true));
     } else {
       addItem();
+    }
+  };
+
+  const addBuy = () =>{
+    if(product){
+      setLoadBuy(true);
+      setTimeout(async ()=>{
+        const res = await axiosInstance.post('/cart/add',{
+          cartItems:{
+              product: product._id,
+              quantity: 1,
+              price: product.price
+          },
+        });
+        if (res.status === 201) {
+          setLoadBuy(false);
+          await getCart();
+          navigate('/confirmaddress');
+        }else{
+          setLoadBuy(false);
+        }
+      },1000);      
+    }
+  }
+
+  const buyNow = () =>{
+    if(!token){
+      dispatch(setShowSignIn(true));
+    }else{
+      addBuy();
     }
   };
 
@@ -175,28 +211,18 @@ const ProductDetailsPage = () => {
                     />
                   )}
                 </Box>
-                {/* <Button
-                  variant="contained"
-                  style={{
-                    width: "40%",
-                    padding: "12px",
-                    backgroundColor: "darkviolet",
-                  }}
-                  startIcon={<FlashOnIcon />}
-                  onClick = {()=>buyNow()}
-                >
-                  BUY NOW
-                </Button> */}
+                
                 <Box sx={{ m: 1, position: "relative", width: "40%" }}>
                   <Button
                     variant="contained"
-                    // disabled={loadAdd}
-                    sx={{ width: "100%",padding: "12px",height:"90%" }}                    
+                    disabled={loadBuy}
+                    sx={{ width: "100%",padding: "12px",height:"90%" }}     
+                    onClick={()=>buyNow()}               
                     startIcon={<FlashOnIcon />}
                   >
                     BUY NOW
                   </Button>
-                  {/* {loadAdd && (
+                  {loadBuy && (
                     <CircularProgress
                       size={24}
                       sx={{
@@ -208,7 +234,7 @@ const ProductDetailsPage = () => {
                         marginLeft: "-12px",
                       }}
                     />
-                  )} */}
+                  )}
                 </Box>
               </div>
             </div>
