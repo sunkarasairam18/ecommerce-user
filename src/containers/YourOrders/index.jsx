@@ -56,7 +56,7 @@ const YourOrders = () => {
                         </div>
                     </div>
                 </div>
-                <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+                <div style={{display:"flex",flexDirection:"column",alignItems:"center",marginBottom:"20px"}}>
                     {
                         (sel === 1 || sel === 3 || orders.length === 0)?
                         <Ntg text={`${sel===1?"No orders to show":(sel === 3?"No Cancelled Orders":"No Orders To be shipped")}`}/>:
@@ -64,9 +64,7 @@ const YourOrders = () => {
                             orders.map((order)=><Order order={order} key={order._id}/>)                            
                         )
                     }
-                    {/* {
-                        JSON.stringify(orders)
-                    } */}
+                    
                     
                 </div>
             </div>

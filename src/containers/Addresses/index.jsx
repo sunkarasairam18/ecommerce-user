@@ -15,7 +15,6 @@ const Addresses = () => {
     const [edititem,setEitem] = useState();
     const [circle,setCir] = useState(true);
 
-
     useEffect(()=>{
         if(!showPop){
             setEitem();

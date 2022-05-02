@@ -172,21 +172,7 @@ const ProductDetailsPage = () => {
               </div>
 
               {/* action buttons */}
-              <div className="buybuttons">
-                {/* <LoadingButton
-                  variant="contained"
-                  style={{
-                    width: "40%",
-                    padding: "12px",
-                    backgroundColor: "dodgerblue",
-                  }}
-                  loading={loadAdd}
-                  startIcon={<ShoppingCartIcon />}
-                  onClick = {()=>addToCart()}
-                  loadingPosition="start"
-                >
-                  ADD TO CART
-                </LoadingButton> */}
+              <div className="buybuttons">                
                 <Box sx={{ m: 1, position: "relative", width: "40%"}}>
                   <Button
                     variant="contained"
@@ -289,12 +275,7 @@ const ProductDetailsPage = () => {
                   {product.price.toLocaleString("en-US")}
                 </span>
               </div>
-              <div>
-                {/* <p style={{ 
-                color: '#212121', 
-                fontSize: '14px',
-                fontWeight: '600' 
-                }}>Available Offers</p> */}
+              <div>                
                 <p style={{ display: "flex" }}>
                   <span
                     style={{

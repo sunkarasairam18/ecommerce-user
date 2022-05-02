@@ -6,8 +6,7 @@ import shield from '../../images/shield.png';
 import { useNavigate } from "react-router-dom";
 
 const Account = () => {
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   return (
     <div className="account">

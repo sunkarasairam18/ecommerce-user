@@ -47,7 +47,6 @@ const ProductPage = ({cid,type}) => {
                 }
             }
         }
-        // console.log(page.products[0].img,"3fd6b15c-3a29-4bf0-bc0f-5e6ad74918ed.jpeg");
         return products;
     
     }

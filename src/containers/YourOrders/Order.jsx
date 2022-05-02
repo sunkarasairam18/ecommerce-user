@@ -1,6 +1,7 @@
 import React from 'react';
 import './Order.css';
 import { useNavigate } from 'react-router-dom';
+import Tooltip from '@mui/material/Tooltip';
 
 const Order = ({order}) => {
     const navigate = useNavigate();
@@ -43,22 +44,19 @@ const Order = ({order}) => {
                         <div className="ohst">
                             SHIP TO
                         </div>
-                        <div className="ohstc">
-                            {order.address.substring(0,10)+"..."}
+                        <div className="ohstc" style={{cursor:"pointer",borderBottom:"1px solid black"}}>
+                            <Tooltip title={<div style={{fontSize:"15px",width:"150px"}}>{order.address}</div>} arrow>
+                               <div>
+                               {order.address.substring(0,10)+"..."}
+                               </div>
+                            </Tooltip>
                         </div>
                     </div>
                 </div>
                 <div style={{with:"50%",display:"flex",fontWeight:"400"}}>
                     {
                         `ORDER # ${order._id}`
-                    }
-                        {/* <div className="ohst">
-                            ORDER # 
-                        </div>
-                        <div className="ohstc">
-                            {}
-                        </div> */}
-                    
+                    }                                      
                 </div>
             </div>
             <div className='orderitems'>

@@ -16,15 +16,7 @@ const CartItem = ({item}) => {
     const [updating,setUpdating] = useState(false);
     const navigate = useNavigate();
     const cartCount = useSelector(state => state.data.cartCount);
-
-    // const getCart = async () =>{
-    //     const res = await axiosInstance.get(`/cart/get`);
-    //     if(res.status === 200){
-    //         console.log(res.data);
-    //         dispatch(setCart(res.data));
-    //         dispatch(setCartCount(res.data.length));
-    //     }
-    // };
+    
 
     const update = async (i) => {
         if(item){

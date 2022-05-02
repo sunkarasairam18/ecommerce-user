@@ -9,7 +9,6 @@
 .addressesbox{
     height: 95%;
     width: 45%;
-    /* background-color: blue; */
     display: flex;
     flex-direction: column;
     align-items: center;

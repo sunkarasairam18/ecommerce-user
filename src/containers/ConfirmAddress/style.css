@@ -25,10 +25,9 @@
 .cathelp{
     font-size: small;
     font-weight: 400;
-    /* font-style: italic; */
 }
 .currentadd{
-    width: 220px;
+    width: 260px;
 }
 .currentadd>div{
     margin-bottom: 5px;

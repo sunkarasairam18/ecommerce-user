@@ -75,7 +75,9 @@ const ConfirmAddress = () => {
                     <div>
                         {selected.pinCode}
                     </div>
-                    
+                    <div>
+                        {`Phone Number - ${selected.mobileNumber}`}
+                    </div>
                     <Button variant="contained" sx={{marginTop:"10px",width:"100%",backgroundColor:"dodgerblue",textTransform:"none",fontSize:"13px"}} onClick={deliverHere}>Deliver to this Address</Button>
                     <div style={{display:"flex",justifyContent:"space-between"}}>
                         <Button variant="contained" sx={{marginTop:"10px",width:"48%",backgroundColor:"rgb(88, 170, 251)",textTransform:"none",fontSize:"13px"}} onClick={()=>setSelPop(true)}>Choose</Button>

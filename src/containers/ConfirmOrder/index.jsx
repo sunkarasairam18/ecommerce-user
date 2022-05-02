@@ -2,11 +2,17 @@ import React,{useEffect,useState} from 'react';
 import './style.css';
 import OrderProcess from '../../components/OrderProcess';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { axiosInstance } from '../../api/axios';
+import { setCart,setCartCount,setToast } from '../../Store/reducer';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const CofirmOrder = () => {
+    const [circle,setCir] = useState(false);
     const {state} = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const cart = useSelector(state  => state.data.cart);
 
     useEffect(()=>{
@@ -16,6 +22,38 @@ const CofirmOrder = () => {
             navigate('/');
         }
     },[state]);
+
+    const placeOrder = () =>{
+        try{
+            setCir(true);
+            setTimeout(async ()=>{
+                let items = [];
+                for(let i = 0;i<cart.length;i++){
+                    items.push({
+                        product: cart[i]._id,
+                        quantity: cart[i].quantity
+                    });
+                }
+
+                const res = await axiosInstance.post("/order/create",{
+                    orderedItems: [...items],
+                    address: `${state.locality},${state.address},${state.cityDistrictTown},${state.state} - ${state.pinCode},Phone Number - ${state.mobileNumber}`
+                });
+
+                if(res.status === 200){
+                    setCir(false);
+                    dispatch(setCart([]));
+                    dispatch(setCartCount(0));
+                    navigate("/account/orders");
+                }
+                },500);
+
+        }catch(err){
+            dispatch(setToast({msg:`Couldn't place order,Try later `,severity:"error"}));
+            setCir(false);
+            navigate("/");
+        }
+    };
 
     const total = (list) =>{
         let sum = 0;
@@ -27,6 +65,12 @@ const CofirmOrder = () => {
 
     return ( 
         <div className='confirmorder'>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={circle}
+                >
+                <CircularProgress size="6rem" color="inherit" />
+            </Backdrop>
             <div className="cobox">
                 <div style={{width:"100%"}}>
                     <OrderProcess step={2}/>
@@ -69,11 +113,11 @@ const CofirmOrder = () => {
                                 </div>
                             </div>
                         )}
-                        {/* {JSON.stringify(cart)} */}
+                        
                     </div>
                     </div>
                     <div className="coprice">
-                        <div style={{width:"85%",textAlign:"center",marginTop:"10px",backgroundColor:"#679cf1",paddingLeft:"5px",paddingRight:"5px",paddingTop:"8px",paddingBottom:"8px",cursor:"pointer",borderRadius:"2px",fontWeight:"400",boxShadow:"rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"}}>
+                        <div style={{width:"85%",textAlign:"center",marginTop:"10px",backgroundColor:"#679cf1",paddingLeft:"5px",paddingRight:"5px",paddingTop:"8px",paddingBottom:"8px",cursor:"pointer",borderRadius:"2px",fontWeight:"400",boxShadow:"rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"}} onClick={()=>placeOrder()}>
                             Place Your Order
                         </div>
                         <div style={{width:"85%",marginTop:"10px",fontWeight:600,fontSize:"medium"}}>
