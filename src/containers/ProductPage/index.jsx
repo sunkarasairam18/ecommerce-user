@@ -36,17 +36,18 @@ const ProductPage = ({cid,type}) => {
         if(page.products && page.products.length>0){
             var l = page.products.length;
             for(var i = 0;i<l;i+=3){
-                if(i+3<l){
+                if(i+3<=l){
                     products.push(
                         <div style={{width:"100%",display:"flex",placeItems:"center",justifyContent:"space-around"}}>
-                            <Card><img style={{width:"90%",height:"auto"}} src={page.products[i].img} alt="pic"/></Card>
-                            <Card><img style={{width:"90%",height:"auto"}} src={page.products[i+1].img} alt="pic"/></Card>
-                            <Card><img style={{width:"90%",height:"auto"}} src={page.products[i+2].img} alt="pic"/></Card>
+                            <Card><img src={`https://mern-ecommerce-products-images.s3.amazonaws.com/${page.products[i].img}`} alt="pic"/></Card>
+                            <Card><img src={`https://mern-ecommerce-products-images.s3.amazonaws.com/${page.products[i+1].img}`} alt="pic"/></Card>
+                            <Card><img src={`https://mern-ecommerce-products-images.s3.amazonaws.com/${page.products[i+2].img}`} alt="pic"/></Card>
                         </div>
                     );
                 }
             }
         }
+        // console.log(page.products[0].img,"3fd6b15c-3a29-4bf0-bc0f-5e6ad74918ed.jpeg");
         return products;
     
     }
@@ -59,7 +60,7 @@ const ProductPage = ({cid,type}) => {
                 <Carousel renderThumbs={()=>{}} autoPlay infiniteLoop interval={3000} dynamicHeight>
                    {page.banners.map(({img,_id,navigateTo})=>
                             <a key={_id} style={{display:"block",objectFit:"cover",objectPosition:"50% 50%",width:"100%",height:"35em"}} href={navigateTo}>
-                                <img src={img} style={{width:"100%",height:"100%"}} alt="pic" /> 
+                                <img src={`https://mern-ecommerce-products-images.s3.amazonaws.com/${img}`} style={{width:"100%",height:"100%"}} alt="pic" /> 
                             </a>                           
                         )}
                 </Carousel>
@@ -73,7 +74,7 @@ const ProductPage = ({cid,type}) => {
                     )
                 }
             </div>    }     */}
-            {renderProducts()}
+            {page && renderProducts()}
                 
         </div>
     );
